@@ -57,10 +57,19 @@ print(x_test.shape)
 svm = SVC()
 svm.fit(x_train,y_train)
 svm_predict = svm.predict(x_test)
+conf_mat = metrics.confusion_matrix(y_test,svm_predict)
 
 print(metrics.classification_report(y_test, svm_predict))
 accuracy = metrics.accuracy_score(y_test, svm_predict)
 average_accuracy = np.mean(y_test == svm_predict) * 100
 print("The average_accuracy is {0:.1f}%".format(average_accuracy))
+print('\nConfusion Matrix: \n',conf_mat)
+
+plt.matshow(conf_mat)
+plt.title('Confusion Matrix for Validation Data')
+plt.colorbar()
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.show()
 
 
